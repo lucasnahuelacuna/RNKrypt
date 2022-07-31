@@ -1,10 +1,11 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
+import Home from './src/screens/Home';
 
 const App = () => {
   return (
     <View>
-      <Text style={{ fontSize: 25 }}>Kryptocurrencies App</Text>
+      <Home />
     </View>
   );
 };
