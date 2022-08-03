@@ -1,17 +1,23 @@
 import React, { useState } from 'react'
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import Card from '../components/Card';
+import { useCryptos } from '../hooks/useCryptos';
 
 const Home = () => {
-    const [cryprocurrencies, setCryptocurrencies] = useState([1,2,3,4,5,6,7,8,9,10]);
+    const { cryptocurrencies } = useCryptos();
 
+    console.log('Cryptocurrencies TEST: ', cryptocurrencies?.data?.coins);
     return (
         <View style={styles.homeContainer}>
-            <Text style={styles.title}>Top 100 Cryptocurrencies</Text>
+            <Text style={styles.title}>Top 10 Cryptocurrencies</Text>
             <ScrollView>
                 {
-                    cryprocurrencies.map((item, index) => (
-                        <Card value={item} key={index} />
+                    cryptocurrencies?.data?.coins.map((item, index) => (
+                        <Card 
+                            value={item.name}
+                            icon={item.iconUrl} 
+                            key={index} 
+                        />
                     ))
                 }
             </ScrollView>
