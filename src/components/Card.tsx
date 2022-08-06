@@ -1,5 +1,13 @@
-import React from 'react'
-import { Image, StyleSheet, Text, View } from 'react-native'
+import React from 'react';
+import { Image, StyleSheet, Text, View } from 'react-native';
+import millify from 'millify';
+
+const Row = ({ text, value }: any) => (
+  <View style={styles.rowText}>
+    <Text style={styles.text}>{ text }:</Text>
+    <Text style={styles.value}>{ millify(value) }</Text>
+  </View>
+)
 
 const Card = ({ value, icon, rank, price, market, dailyChange }: any) => {
   return (
@@ -15,9 +23,9 @@ const Card = ({ value, icon, rank, price, market, dailyChange }: any) => {
         </View>
         <View style={styles.horizontalLine}  />
         <View style={styles.cardBody}>
-          <Text style={styles.text}>Price: { price }</Text>
-          <Text style={styles.text}>Market Cap: { market }</Text>
-          <Text style={styles.text}>Daily Change: { dailyChange }</Text>
+          <Row text='Price' value={price} />
+          <Row text='Market Cap' value={market} />
+          <Row text='Daily Change' value={dailyChange} />
         </View>
     </View>
   )
@@ -37,6 +45,7 @@ const styles = StyleSheet.create({
     },
     title: {
       fontSize: 18,
+      fontWeight: '600',
       color: '#000'
     },
     iconImage: {
@@ -53,10 +62,22 @@ const styles = StyleSheet.create({
     cardBody: {
       marginHorizontal: 15
     },
+    rowText: {
+      flexDirection: 'row',
+      alignItems: 'center'
+    },
     text: {
       color: '#000',
       fontSize: 15,
-      marginBottom: 10
+      marginBottom: 10,
+      fontWeight: '300'
+    },
+    value: {
+      color: '#000',
+      fontSize: 15,
+      marginBottom: 10,
+      fontWeight: '400',
+      marginLeft: 5
     }
 })
 

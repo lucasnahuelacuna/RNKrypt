@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { ScrollView, StyleSheet, Text, View } from 'react-native'
 import Card from '../components/Card';
 import { useCryptos } from '../hooks/useCryptos';
@@ -6,7 +6,6 @@ import { useCryptos } from '../hooks/useCryptos';
 const Home = () => {
     const { cryptocurrencies } = useCryptos();
 
-    console.log('Cryptocurrencies TEST: ', cryptocurrencies);
     return (
         <View style={styles.homeContainer}>
             <Text style={styles.title}>Top 10 Cryptocurrencies</Text>
@@ -33,12 +32,14 @@ const styles = StyleSheet.create({
     homeContainer: {
         paddingVertical: 5,
         paddingHorizontal: 15,
-        marginBottom: 50,
+        marginBottom: 150,
         backgroundColor: '#f2f2f2'
     },
     title: {
         fontSize: 25,
-        color: '#000'
+        color: '#000',
+        marginTop: 15,
+        marginBottom: 20
     }
 })
 export default Home
