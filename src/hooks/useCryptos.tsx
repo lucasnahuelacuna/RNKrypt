@@ -9,11 +9,11 @@ export const useCryptos = () => {
     
     const loadCryptos = async () => {
         try {
-            const res = await fetch('https://coinranking1.p.rapidapi.com/coins?limit=10', {
+            const res = await fetch('https://coingecko.p.rapidapi.com/coins/markets?vs_currency=usd&page=1&per_page=10&order=market_cap_desc', {
                 method: 'GET',
-                headers:{
-                    'x-rapidapi-host': 'coinranking1.p.rapidapi.com',
-                    'x-rapidapi-key': 'f9f54b81e7msh182a4629e8c29ccp1d0449jsn1c4daeee4f59'
+                headers: {
+                    'X-RapidAPI-Key': '3c0221433cmsh8d72181be8e749ep1b28d9jsna9d5be2efa76',
+                    'X-RapidAPI-Host': 'coingecko.p.rapidapi.com'
                 }
             });
             const data = await res.json();

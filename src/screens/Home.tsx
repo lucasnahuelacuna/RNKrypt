@@ -6,16 +6,16 @@ import { useCryptos } from '../hooks/useCryptos';
 const Home = () => {
     const { cryptocurrencies } = useCryptos();
 
-    console.log('Cryptocurrencies TEST: ', cryptocurrencies?.data?.coins);
+    console.log('Cryptocurrencies TEST: ', cryptocurrencies);
     return (
         <View style={styles.homeContainer}>
             <Text style={styles.title}>Top 10 Cryptocurrencies</Text>
             <ScrollView>
                 {
-                    cryptocurrencies?.data?.coins.map((item, index) => (
+                    cryptocurrencies.map((item, index) => (
                         <Card 
                             value={item.name}
-                            icon={item.iconUrl} 
+                            icon={item.image} 
                             key={index} 
                         />
                     ))
