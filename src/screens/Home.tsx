@@ -6,14 +6,16 @@ import { useCryptos } from '../hooks/useCryptos';
 const Home = () => {
     const { cryptocurrencies } = useCryptos();
 
+    console.log({ cryptocurrencies });
     return (
         <View style={styles.homeContainer}>
             <Text style={styles.title}>Top 10 Cryptocurrencies</Text>
             <ScrollView>
                 {
                     cryptocurrencies.map((item, index) => (
-                        <Card 
-                            value={item.name}
+                        <Card
+                            id={item.id} 
+                            name={item.name}
                             icon={item.image}
                             rank={item.market_cap_rank}
                             price={item.current_price}
@@ -32,7 +34,6 @@ const styles = StyleSheet.create({
     homeContainer: {
         paddingVertical: 5,
         paddingHorizontal: 15,
-        marginBottom: 150,
         backgroundColor: '#f2f2f2'
     },
     title: {

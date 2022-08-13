@@ -1,6 +1,7 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import millify from 'millify';
+import { useNavigation } from '@react-navigation/native';
 
 const Row = ({ text, value }: any) => (
   <View style={styles.rowText}>
@@ -9,11 +10,15 @@ const Row = ({ text, value }: any) => (
   </View>
 )
 
-const Card = ({ value, icon, rank, price, market, dailyChange }: any) => {
+const Card = ({ id, name, icon, rank, price, market, dailyChange }: any) => {
+  const navigation = useNavigation<any>();
+
   return (
-    <View style={styles.cardContainer}>
+    <TouchableOpacity style={styles.cardContainer}
+      onPress={() => navigation.navigate('Details', { id, name })}
+    >
         <View style={styles.cardHeader}>
-          <Text style={styles.title}>{ rank }. { value }</Text>
+          <Text style={styles.title}>{ rank }. { name }</Text>
           <Image 
             source={{
               uri: icon
@@ -27,7 +32,7 @@ const Card = ({ value, icon, rank, price, market, dailyChange }: any) => {
           <Row text='Market Cap' value={market} />
           <Row text='Daily Change' value={dailyChange} />
         </View>
-    </View>
+    </TouchableOpacity>
   )
 }
 
