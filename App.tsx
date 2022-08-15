@@ -4,11 +4,12 @@ import { View } from 'react-native';
 import Home from './src/screens/Home';
 import { NavigationContainer } from '@react-navigation/native';
 import { Navigator } from './src/navigator/Navigator';
+import { Tabs } from './src/navigator/Tabs';
 
 const App = () => {
   return (
     <NavigationContainer>
-      <Navigator />
+      <Tabs />
     </NavigationContainer>
   );
 };
