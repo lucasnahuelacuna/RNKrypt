@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { Alert, Dimensions, ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Alert, Dimensions, ScrollView, StyleSheet, Text, TouchableOpacity, View, ActivityIndicator } from 'react-native'
 import { useCryptocurrency } from '../hooks/useCryptocurrency';
 import { LineChart } from 'react-native-chart-kit';
 import { useNavigation } from '@react-navigation/native';
@@ -13,7 +13,16 @@ const chartConfig = {
     color: (opacity = 1) => `rgba(0, 21, 41, ${opacity})`,
     strokeWidth: 2,
     barPercentage: 0.5,
-    useShadowColorFromDataset: true
+    useShadowColorFromDataset: true,
+    propsForVerticalLabels: {
+        fontWeight: 'bold',
+        fontSize: 13,
+    },
+    propsForHorizontalLabels: {
+        x: 120,
+        fontWeight: 'bold',
+        fontSize: 13
+    }
 };
 
 const Details = ({ route }: any) => {
@@ -40,29 +49,34 @@ const Details = ({ route }: any) => {
         return (
             <ScrollView>
                 <Text style={styles.price}>${params.price }</Text>
+                <Text style={styles.timerange}>Last 7 days</Text>
                 {
-                    isLoading ? <Text>Cargando...</Text>
-                        : <LineChart 
-                            data={{
-                                labels: getArray(date),
-                                datasets: [
-                                {
-                                    data: getArray(prices),
-                                    color: (opacity = 1) => `rgba(5, 80, 150, ${opacity})`,
-                                    strokeWidth: 2
-                                }
-                                ],
-                            }}
-                            width={screenWidth}
-                            height={350}
-                            chartConfig={chartConfig}
-                            verticalLabelRotation={0}
-                            horizontalLabelRotation={0}
-                            withInnerLines={false}
-                            withDots={false}
-                            withVerticalLabels={true}
-                            bezier
-                        /> 
+                    isLoading 
+                        ? <ActivityIndicator />
+                        : <View style={{ marginLeft: -55}}>
+                            <LineChart 
+                                data={{
+                                    labels: getArray(date),
+                                    datasets: [
+                                    {
+                                        data: getArray(prices),
+                                        color: (opacity = 1) => `rgba(5, 80, 150, ${opacity})`,
+                                        strokeWidth: 2
+                                    }
+                                    ],
+                                }}
+                                width={screenWidth + 70}
+                                height={350}
+                                chartConfig={chartConfig}
+                                verticalLabelRotation={0}
+                                horizontalLabelRotation={0}
+                                withVerticalLines={false}
+                                withHorizontalLines={true}
+                                withDots={false}
+                                withVerticalLabels={true}
+                                bezier
+                            /> 
+                        </View>
                 }
                 <View style={styles.dataDetails}>
                     <Row text="Market Cap Rank" value={params.rank} justifyContent={true} rank/>
@@ -110,6 +124,12 @@ const styles = StyleSheet.create({
         marginBottom: 20,
         marginLeft: 20,
         color: '#000'
+    },
+    timerange: {
+        marginLeft: 20,
+        marginBottom: 20,
+        color: '#000',
+        fontSize: 15
     },
     buttonContainer: {
        flex: 1,

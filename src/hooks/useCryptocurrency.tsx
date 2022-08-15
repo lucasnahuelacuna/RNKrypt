@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
+import { Platform } from 'react-native';
 
 export const useCryptocurrency = (id: string) => {
     const [isLoading, setIsLoading] = useState(true);
@@ -25,7 +26,7 @@ export const useCryptocurrency = (id: string) => {
             })
             const timestamp = data.prices.map(item => {
                 let date = new Date(item[0]).toLocaleDateString();
-                return date.slice(3,5);
+                return Platform.OS === 'android' ? date.slice(3,5) : date.slice(2,4);
             })
             
             setPrices(prices);
