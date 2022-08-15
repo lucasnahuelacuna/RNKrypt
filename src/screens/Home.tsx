@@ -6,7 +6,6 @@ import { useCryptos } from '../hooks/useCryptos';
 const Home = () => {
     const { cryptocurrencies } = useCryptos();
 
-    console.log({ cryptocurrencies });
     return (
         <View style={styles.homeContainer}>
             <Text style={styles.title}>Top 10 Cryptocurrencies</Text>
@@ -20,7 +19,16 @@ const Home = () => {
                             rank={item.market_cap_rank}
                             price={item.current_price}
                             market={item.market_cap}
-                            dailyChange={item.price_change_percentage_24h} 
+                            dailyChange={item.price_change_percentage_24h}
+                            fullyDilutedValuation={item.fully_diluted_valuation}
+                            totalVolume={item.total_volume}
+                            high24h={item.high_24h}
+                            low24h={item.low_24h}
+                            circulatingSupply={item.circulating_supply}
+                            totalSupply={item.total_supply}
+                            maxSupply={item.max_supply}
+                            ath={item.ath}
+                            atl={item.atl} 
                             key={index} 
                         />
                     ))

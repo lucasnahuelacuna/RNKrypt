@@ -1,21 +1,48 @@
 import React from 'react';
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import millify from 'millify';
 import { useNavigation } from '@react-navigation/native';
+import Row from './Row';
 
-const Row = ({ text, value }: any) => (
-  <View style={styles.rowText}>
-    <Text style={styles.text}>{ text }:</Text>
-    <Text style={styles.value}>{ millify(value) }</Text>
-  </View>
-)
 
-const Card = ({ id, name, icon, rank, price, market, dailyChange }: any) => {
+const Card = ({ id, 
+  name, 
+  icon, 
+  rank, 
+  price, 
+  market, 
+  dailyChange,
+  fullyDilutedValuation,
+  totalVolume,
+  high24h,
+  low24h,
+  circulatingSupply,
+  totalSupply,
+  maxSupply,
+  ath,
+  atl 
+}: any) => {
   const navigation = useNavigation<any>();
 
   return (
     <TouchableOpacity style={styles.cardContainer}
-      onPress={() => navigation.navigate('Details', { id, name })}
+      onPress={() => navigation.navigate('Details', { 
+        id, 
+        name,
+        icon,
+        price,
+        rank,
+        market,
+        dailyChange,
+        fullyDilutedValuation,
+        totalVolume,
+        high24h,
+        low24h,
+        circulatingSupply,
+        totalSupply,
+        maxSupply,
+        ath,
+        atl 
+      })}
     >
         <View style={styles.cardHeader}>
           <Text style={styles.title}>{ rank }. { name }</Text>
@@ -28,9 +55,9 @@ const Card = ({ id, name, icon, rank, price, market, dailyChange }: any) => {
         </View>
         <View style={styles.horizontalLine}  />
         <View style={styles.cardBody}>
-          <Row text='Price' value={price} />
-          <Row text='Market Cap' value={market} />
-          <Row text='Daily Change' value={dailyChange} />
+          <Row text='Price' value={price} justifyContent={false} />
+          <Row text='Market Cap' value={market} justifyContent={false} />
+          <Row text='Daily Change' value={dailyChange} justifyContent={false} />
         </View>
     </TouchableOpacity>
   )
