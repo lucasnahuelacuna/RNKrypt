@@ -1,15 +1,21 @@
-import React from 'react'
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import React, { useEffect } from 'react'
+import { Platform, SafeAreaView, ScrollView, StyleSheet, Text, View } from 'react-native'
 import Card from '../components/Card';
 import { useCryptos } from '../hooks/useCryptos';
 
-const Home = () => {
+const Home = ({ navigation }: any) => {
     const { cryptocurrencies } = useCryptos();
 
+    useEffect(() => {
+      navigation.setOptions({
+        headerShown: false
+      })
+    }, [])
+    
     return (
-        <View style={styles.homeContainer}>
-            <Text style={styles.title}>Top 10 Cryptocurrencies</Text>
-            <ScrollView>
+        <SafeAreaView style={styles.homeContainer}>
+            <ScrollView style={styles.homeContainer}>
+                <Text style={styles.title}>Top 10 Cryptocurrencies</Text>
                 {
                     cryptocurrencies.map((item, index) => (
                         <Card
@@ -34,7 +40,7 @@ const Home = () => {
                     ))
                 }
             </ScrollView>
-        </View>
+        </SafeAreaView>
     )
 }
 

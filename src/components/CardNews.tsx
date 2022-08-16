@@ -43,7 +43,8 @@ const styles = StyleSheet.create({
     },
     text: {
         textAlign: 'justify',
-        fontWeight: '300'
+        fontWeight: '300',
+        color: '#000'
     }
 })
 
